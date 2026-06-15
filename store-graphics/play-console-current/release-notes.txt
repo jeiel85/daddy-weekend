@@ -1,0 +1,6 @@
+<ko-KR>
+주말 아빠 코스 첫 출시입니다. 아이 나이대와 오늘 아빠의 체력만 고르면, 집 앞 놀이터부터 동네 도서관·시장 투어까지 부담 없는 주말 활동 코스를 즉석에서 추천합니다. 아빠표 준비물 리스트와 예상 비용까지 챙겨드리고, 마음에 든 코스는 평점·메모와 함께 저장할 수 있어요. 모든 기록은 인터넷 없이 기기 안에만 안전하게 보관됩니다.
+</ko-KR>
+<en-US>
+The first release of Daddy Weekend. Just pick your child's age group and your energy level for the day to get instant, realistic weekend activity courses — from the local playground to the library and the neighborhood market. Each course comes with a dad-friendly packing list and an estimated cost, and you can save your favorites with ratings and notes. Everything stays private on your device, with no internet required.
+</en-US>

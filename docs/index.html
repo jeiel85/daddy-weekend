@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="4050 아빠들을 위한 현실적이고 부담 없는 주말 자녀 맞춤형 코스 추천 및 일정 저장 관리 서비스 앱 - 주말 아빠 코스">
+  <meta name="theme-color" content="#0F172A">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <meta property="og:title" content="주말 아빠 코스 - Daddy Weekend">
+  <meta property="og:description" content="아이와의 소중한 주말, 아빠의 고민을 해결하는 맞춤형 자녀 코스 추천 및 관리">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jeiel85.github.io/daddy-weekend/">
+  <meta property="og:image" content="https://jeiel85.github.io/daddy-weekend/docs/assets/feature-graphic.png">
+  <title>주말 아빠 코스 - Daddy Weekend</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@300;400;600;800&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --slate-dark: #0F172A;
+      --slate-card: rgba(30, 41, 59, 0.7);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --primary-blue: #2563EB;
+      --accent-yellow: #FBBF24;
+      --accent-cyan: #06B6D4;
+      --text-primary: #F8FAFC;
+      --text-secondary: #94A3B8;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--slate-dark);
+      color: var(--text-primary);
+      font-family: 'Outfit', 'Noto Sans KR', 'Inter', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.2), transparent 45%),
+        radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.08), transparent 45%);
+    }
+
+    .shell {
+      width: min(1200px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    /* Navigation */
+    header {
+      border-bottom: 1px solid var(--border-color);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.4rem;
+      letter-spacing: -0.5px;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .brand img {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .brand span {
+      background: linear-gradient(135deg, var(--text-primary), var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .lang-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-family: inherit;
+    }
+
+    .lang-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 80px 0 60px 0;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #60A5FA, var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: clamp(1.1rem, 3vw, 1.4rem);
+      color: var(--text-secondary);
+      max-width: 750px;
+      margin: 0 auto 40px auto;
+      font-weight: 300;
+    }
+
+    /* Phone Mockup */
+    .mockup-container {
+      background: #1E293B;
+      border: 12px solid #334155;
+      border-radius: 48px;
+      max-width: 340px;
+      margin: 0 auto 80px auto;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 9 / 19.5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mockup-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 150px;
+      height: 25px;
+      background: #334155;
+      border-bottom-left-radius: 18px;
+      border-bottom-right-radius: 18px;
+      z-index: 10;
+    }
+
+    .phone-screen-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      padding: 80px 0;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .feature-card {
+      background: var(--slate-card);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 32px;
+      transition: transform 0.3s, border-color 0.3s;
+      backdrop-filter: blur(10px);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(6, 182, 212, 0.3);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .feature-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      font-weight: 300;
+    }
+
+    /* Technical details */
+    .tech-specs {
+      padding: 80px 0;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .tech-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 48px;
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    .tech-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      padding: 24px;
+      border-radius: 16px;
+    }
+
+    .tech-item strong {
+      display: block;
+      color: var(--accent-cyan);
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    .tech-item span {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 40px 0;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="shell nav-container">
+      <a href="index.html" class="brand">
+        <img src="assets/icon.png" alt="주말 아빠 코스">
+        <span>주말 아빠 코스</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features" data-ko="주요 기능" data-en="Features">주요 기능</a>
+        <a href="#specs" data-ko="기술 사양" data-en="Specs">기술 사양</a>
+        <button class="lang-btn" id="lang-switch">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="shell hero">
+    <h1 id="hero-title">아이와의 주말,<br><span>고민 없이 행복하게</span></h1>
+    <p id="hero-desc">40~50대 아빠들의 어깨를 가볍게 해줄 맞춤 코스 탐색기. 아이 연령대와 아빠의 오늘의 체력 상태만 선택하면 현실적이고 부담 없는 주말 오프라인 활동 코스를 즉시 추천합니다.</p>
+    
+    <div class="mockup-container">
+      <img src="assets/screenshot-1.png" alt="주말 아빠 코스 앱 화면 실사" class="phone-screen-img">
+    </div>
+  </section>
+
+  <section class="shell features-grid" id="features">
+    <div class="feature-card">
+      <span class="feature-icon">⚡</span>
+      <h3 id="f1-title">초간단 2스텝 필터링</h3>
+      <p id="f1-desc">자녀의 나이(영유아부터 초등 고학년까지)와 오늘 아빠의 에너지 상태(피곤함, 보통, 충분함) 두 가지만 고르면 최적의 맞춤 여행 계획이 나타납니다.</p>
+    </div>
+    
+    <div class="feature-card">
+      <span class="feature-icon">🎒</span>
+      <h3 id="f2-title">현실적인 준비물과 예상 비용</h3>
+      <p id="f2-desc">거창한 여행 정보가 아닙니다. 아빠 지갑 사정을 고려한 합리적인 예산대별 코스와 기저귀, 물티슈, 동전 등 아빠 관점의 꼼꼼한 실전 준비물 리스트를 챙겨드립니다.</p>
+    </div>
+
+    <div class="feature-card">
+      <span class="feature-icon">💾</span>
+      <h3 id="f3-title">Local-First 보안 및 소장</h3>
+      <p id="f3-desc">앱 내의 모든 데이터는 내 폰(Room DB)에 안전하게 보관됩니다. 가족과 꼭 다시 가고 싶은 만족스러웠던 코스는 나만의 책갈피로 저장하고 자유롭게 메모를 덧붙이세요.</p>
+    </div>
+  </section>
+
+  <section class="shell tech-specs" id="specs">
+    <h2 class="tech-title" id="specs-title">기술 아키텍처 & 특징</h2>
+    <div class="tech-grid">
+      <div class="tech-item">
+        <strong>Modern Kotlin DSL</strong>
+        <span>최신 빌드 관리를 위해 Gradle Kotlin DSL을 채택하여 지속 가능한 의존성 관리 구성.</span>
+      </div>
+      <div class="tech-item">
+        <strong>Jetpack Compose & M3</strong>
+        <span>선언형 UI 툴킷과 Material Design 3 디자인 가이드를 준수하여 부드럽고 미려한 인터페이스 구현.</span>
+      </div>
+      <div class="tech-item">
+        <strong>Room Local Database</strong>
+        <span>오프라인 환경에서도 아무 장벽 없이 데이터를 불러오고 메모를 수정할 수 있는 완전 오프라인-퍼스트 설계.</span>
+      </div>
+      <div class="tech-item">
+        <strong>Robust Fallback System</strong>
+        <span>사용자가 선택한 모든 복합 조건에 100% 일치하는 코스가 없을 경우, 나이와 체력을 기준으로 가장 근접한 차선책 코스를 유연하게 제시하는 필터 시스템 구축.</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="shell">
+      <p>&copy; 2026 Sitdory. All Rights Reserved.</p>
+      <p style="margin-top: 10px;">
+        <a href="privacy.html" id="link-privacy">개인정보처리방침 (Privacy Policy)</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      ko: {
+        title: "주말 아빠 코스 - Daddy Weekend",
+        heroTitle: "아이와의 주말,<br><span>고민 없이 행복하게</span>",
+        heroDesc: "40~50대 아빠들의 어깨를 가볍게 해줄 맞춤 코스 탐색기. 아이 연령대와 아빠의 오늘의 체력 상태만 선택하면 현실적이고 부담 없는 주말 오프라인 활동 코스를 즉시 추천합니다.",
+        f1Title: "초간단 2스텝 필터링",
+        f1Desc: "자녀의 나이(영유아부터 초등 고학년까지)와 오늘 아빠의 에너지 상태(피곤함, 보통, 충분함) 두 가지만 고르면 최적의 맞춤 여행 계획이 나타납니다.",
+        f2Title: "현실적인 준비물과 예상 비용",
+        f2Desc: "거창한 여행 정보가 아닙니다. 아빠 지갑 사정을 고려한 합리적인 예산대별 코스와 기저귀, 물티슈, 동전 등 아빠 관점의 꼼꼼한 실전 준비물 리스트를 챙겨드립니다.",
+        f3Title: "Local-First 보안 및 소장",
+        f3Desc: "앱 내의 모든 데이터는 내 폰(Room DB)에 안전하게 보관됩니다. 가족과 꼭 다시 가고 싶은 만족스러웠던 코스는 나만의 책갈피로 저장하고 자유롭게 메모를 덧붙이세요.",
+        specsTitle: "기술 아키텍처 & 특징",
+        privacyLink: "개인정보처리방침 (Privacy Policy)"
+      },
+      en: {
+        title: "Daddy Weekend - Custom course selector",
+        heroTitle: "Happy Weekend with Kids,<br><span>Without Stress</span>",
+        heroDesc: "The ultimate customized course selector to ease the shoulders of dads. Select child's age group and dad's current energy level to get instant, highly realistic offline activity course recommendations.",
+        f1Title: "Quick 2-Step Filters",
+        f1Desc: "Simply pick your child's age group (Toddler to Grade School) and your energy gauge (Tired, Normal, Energetic) to unlock custom plans.",
+        f2Title: "Realistic Budgets & Packings",
+        f2Desc: "No over-the-top trip packages. We focus on cost-efficient local spots, offering item checklists (wipes, pocket money) from a dad's perspective.",
+        f3Title: "Secure Local-First DB",
+        f3Desc: "All records are securely persisted on your device. Bookmark your favorite weekend courses and customize them with your personal comments.",
+        specsTitle: "Tech Architecture & Highlights",
+        privacyLink: "Privacy Policy"
+      }
+    };
+
+    let currentLang = 'ko';
+    const langBtn = document.getElementById('lang-switch');
+    const heroTitle = document.getElementById('hero-title');
+    const heroDesc = document.getElementById('hero-desc');
+    const f1Title = document.getElementById('f1-title');
+    const f1Desc = document.getElementById('f1-desc');
+    const f2Title = document.getElementById('f2-title');
+    const f2Desc = document.getElementById('f2-desc');
+    const f3Title = document.getElementById('f3-title');
+    const f3Desc = document.getElementById('f3-desc');
+    const specsTitle = document.getElementById('specs-title');
+    const privacyLink = document.getElementById('link-privacy');
+
+    langBtn.addEventListener('click', () => {
+      currentLang = currentLang === 'ko' ? 'en' : 'ko';
+      langBtn.textContent = currentLang === 'ko' ? 'EN' : 'KO';
+      
+      // Update text
+      document.title = translations[currentLang].title;
+      heroTitle.innerHTML = translations[currentLang].heroTitle;
+      heroDesc.textContent = translations[currentLang].heroDesc;
+      f1Title.textContent = translations[currentLang].f1Title;
+      f1Desc.textContent = translations[currentLang].f1Desc;
+      f2Title.textContent = translations[currentLang].f2Title;
+      f2Desc.textContent = translations[currentLang].f2Desc;
+      f3Title.textContent = translations[currentLang].f3Title;
+      f3Desc.textContent = translations[currentLang].f3Desc;
+      specsTitle.textContent = translations[currentLang].specsTitle;
+      privacyLink.textContent = translations[currentLang].privacyLink;
+      
+      // Update header links
+      document.querySelectorAll('.nav-links a').forEach(el => {
+        el.textContent = el.getAttribute(`data-${currentLang}`);
+      });
+    });
+  </script>
+</body>
+</html>
