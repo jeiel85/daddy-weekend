@@ -17,10 +17,14 @@
 
 ---
 
-## 📸 대표 이미지
+## 📸 앱 미리보기
 
 <div align="center">
-  <img src="docs/assets/feature-graphic.png" width="800" alt="주말 아빠 코스 대표 이미지" />
+  <img src="store-graphics/play-console-current/screenshots/01-home.png" width="240" alt="홈 — 2-Step 코스 추천" />
+  &nbsp;
+  <img src="store-graphics/play-console-current/screenshots/02-results.png" width="240" alt="추천 코스 결과" />
+  &nbsp;
+  <img src="store-graphics/play-console-current/screenshots/03-templates.png" width="240" alt="코스 도감" />
 </div>
 
 ---
