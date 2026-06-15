@@ -1,0 +1,6 @@
+{
+  "name": "주말 아빠 코스",
+  "description": "40~50대 아빠를 위한 현실적이고 부담 없는 주말 자녀 맞춤 코스 추천 서비스 (오프라인/로컬)",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
